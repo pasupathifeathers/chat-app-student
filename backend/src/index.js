@@ -19,11 +19,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    // origin: "http://localhost:5173",
-    origin: ["http://localhost:5173", "http://localhost:5174"],
-    credentials: true,
+    origin: "*", // allow all origins
   })
 );
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
