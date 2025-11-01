@@ -7,9 +7,14 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: (origin, callback) => {
+      callback(null, origin || "*"); // allow any origin dynamically
+    },
+    methods: ["GET", "POST"],
+    credentials: true, // allow cookies / auth
   },
 });
+
 
 export function getReceiverSocketId(userId) {
   return userSocketMap[userId];
